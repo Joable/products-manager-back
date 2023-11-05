@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var productController = require('../controllers/productsController');
 
 
-router.get('/', );
+router.get('/', productController.getAll);
 
-router.get('/:id', );
+router.get('/:id', productController.getById);
 
-router.post('/', );
+router.post('/', productController.create);
 
-router.put('/id', );
+router.put('/id', productController.update);
 
-router.delete('/:id', );
+router.delete('/:id', productController.delete);
 
 module.exports = router;
