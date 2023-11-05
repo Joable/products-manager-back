@@ -24,7 +24,6 @@ module.exports = {
             const document = new productModel({
                 name: req.body.name,
                 price: req.body.price,
-                quantity: req.body.quantity
             });
             
             const product = await document.save();
