@@ -5,18 +5,18 @@ module.exports = {
         try{
             const documents = await productModel.find();
 
-            res.json(documents);
+            res.status(200).json(documents);
         }catch(e){
-            console.log(e);
+            next(e);
         };
     },
     getById: async function(req, res, next) {
         try{
             const documents = await productModel.find({_id: req.params.id});
 
-            res.json(documents);
+            res.status(200).json(documents);
         }catch(e){
-            console.log(e);
+            next(e);
         };
     },
     create: async function(req, res, next) {
@@ -28,27 +28,27 @@ module.exports = {
             
             const product = await document.save();
 
-            res.json(product);
+            res.status(201).json(product);
         }catch(e){
-            console.log(e);
+            next(e);
         };        
     },
     update: async function(req, res, next) {
         try{
             const update = await productModel.updateOne({_id: req.params.id}, req.body)
 
-            res.json(update);
+            res.status(200).json(update);
         }catch(e){
-            console.log(e);
+            next(e);
         };
     },
     delete: async function(req, res, next) {
         try{
             const deleteDocument = await productModel.deleteOne({_id: req.params.id}, req.body);
 
-            res.json(deleteDocument);
+            res.status(200).json(deleteDocument);
         }catch(e){
-            console.log(e);
+            next(e);
         }
     }
 }
