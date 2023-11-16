@@ -24,6 +24,7 @@ module.exports = {
             const document = new productModel({
                 name: req.body.name,
                 price: req.body.price,
+                img: req.body.img
             });
             
             const product = await document.save();
