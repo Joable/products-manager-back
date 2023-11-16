@@ -16,4 +16,10 @@ const productsSchema = mongoose.Schema({
     img: String
 });
 
+productsSchema.virtual("price_currency").get(function(){
+    return `${this.price} $`
+})
+
+productsSchema.set("toJSON", {virtuals: true});
+
 module.exports = mongoose.model("products", productsSchema);
