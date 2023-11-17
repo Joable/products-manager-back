@@ -13,7 +13,14 @@ const productsSchema = mongoose.Schema({
         maxLength: [10, 'This field may not exceed 10 characters long.'],
         min: [0, 'The price value must be greater or equal to 0']
     },
-    img: String
+    img: {
+        type: String,
+        required: [true, 'You must select an image.']
+    },
+    category: {
+        type: String,
+        required: [true, 'You must select a category.']
+    }
 });
 
 productsSchema.virtual("price_currency").get(function(){
