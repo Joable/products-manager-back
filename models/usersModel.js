@@ -1,4 +1,5 @@
 const mongoose = require("../config/mongodb");
+const bcrypt = require("bcrypt");
 
 const usersSchema = mongoose.Schema({
     name: String,
@@ -11,5 +12,11 @@ const usersSchema = mongoose.Schema({
         required: [true, 'Email required']
     }
 });
+
+usersSchema.pre("save", function(next) {
+    this.password = bcrypt.hashSync(this.password, 10);
+
+    next();
+})
 
 module.exports = mongoose.model("users", usersSchema);
