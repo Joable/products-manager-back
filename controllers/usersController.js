@@ -1,4 +1,5 @@
 const usersModel = require("../models/usersModel");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     getAll: async function(req, res, next) {
@@ -9,6 +10,26 @@ module.exports = {
         }catch(e){
             next(e);
         };
+    },
+    validate: async function(req, res, next) {
+        try{
+            const user = await usersModel.findOne({email: req.body.email});
+
+            if(!user){
+                res.json({message: "Email and/or password doesn't match."})
+                
+                return
+            };
+
+            if(bcrypt.compareSync(req.body.password, user.password)){
+                res.json(user);
+            }else{
+                res.json({message:"Email and/or password doesn't match."})
+            };
+
+        }catch(e){
+            next(e);
+        }
     },
     create: async function(req, res, next) {
         try{
